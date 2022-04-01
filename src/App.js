@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import createStore from "./Hooks/useGlobalState";
 
 function App() {
+  const [useStore, dispatch] = createStore(0);
+
+  const Display = () => {
+    const count = useStore();
+    return <div>{count}</div>;
+  };
+
+  const Plus = () => (
+    <button onClick={() => dispatch((count) => count + 1)}>+</button>
+  );
+
+  const Minus = () => (
+    <button onClick={() => dispatch((count) => count - 1)}>-</button>
+  );
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Display />
+      <Plus />
+      <Minus />
     </div>
   );
 }
